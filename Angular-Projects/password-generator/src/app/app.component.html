@@ -1,0 +1,95 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+      <h3>Password Generator</h3>
+      <p>
+        This is a password generator that includes everything you need to
+        generate a password that follows security best practices.
+      </p>
+      <hr />
+      <form (ngSubmit)="generatePassword()" #f="ngForm">
+        <div class="form-group">
+          <label for="length">Password Length</label>
+          <input
+            type="number"
+            name="length"
+            id="length"
+            class="form-control"
+            min="8"
+            max="20"
+            [ngModel]="defaultLength"
+          />
+          <p class="form-text">
+            In alignment with password best practices. All passwords should be
+            between 8 and 20 characters.
+          </p>
+        </div>
+        <hr />
+        <h4>Complexity</h4>
+        <p class="form-text">
+          In order to generate an effective password, some complexity options
+          should be added to ensure a secure password. By default these options
+          are turned on.
+        </p>
+        <div class="form-check form-switch">
+          <label for="numbers" class="form-check-label">Include Numbers?</label>
+          <input
+            type="checkbox"
+            class="form-check-input"
+            role="switch"
+            name="numberSwitch"
+            [ngModel]="defaultChecked"
+          />
+        </div>
+        <div class="form-check form-switch">
+          <label for="numbers" class="form-check-label"
+            >Include Special characters?</label
+          >
+          <input
+            type="checkbox"
+            class="form-check-input"
+            role="switch"
+            name="specialSwitch"
+            [ngModel]="defaultChecked"
+          />
+        </div>
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            name="capitalizedSwitch"
+            id="flexSwitchCheckChecked"
+            [ngModel]="defaultChecked"
+          />
+          <label class="form-check-label" for="flexSwitchCheckChecked"
+            >Include Capitalized Letters?</label
+          >
+        </div>
+        <hr />
+        <div class="form-group">
+          <div class="input-group">
+            <button class="btn btn-primary input-group-text" type="submit">
+              Generate Password
+            </button>
+            <input
+              type="text"
+              class="form-control"
+              name="password"
+              id="password"
+              readonly
+              [value]="generatedPassword"
+            />
+            <button
+              class="btn btn-primary input-group-text"
+              type="button"
+              (click)="onCopy()"
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
