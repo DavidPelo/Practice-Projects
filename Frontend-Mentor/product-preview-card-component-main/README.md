@@ -35,7 +35,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [Product Preview Card](https://your-live-site-url.com)
+- Live Site URL: [Product Preview Card](https://celadon-flan-a0a64a.netlify.app/)
 
 ## My process
 
