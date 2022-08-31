@@ -30,6 +30,11 @@ body {
   height: 100vh;
 }
 
+footer {
+  position: absolute;
+  bottom: 10px;
+}
+
 .card {
   display: flex;
   flex-direction: column;
