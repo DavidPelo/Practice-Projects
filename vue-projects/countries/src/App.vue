@@ -1,47 +1,50 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script>
+import CountryCard from './components/CountryCard.vue'
+
+export default {
+  components: {
+    CountryCard,
+  },
+
+  data: () => ({
+    countries: [],
+    dataFetched: false
+  }),
+
+  created() {
+    // fetch on init
+    this.fetchData()
+  },
+
+  methods: {
+    async fetchData() {
+      const url = 'https://restcountries.com/v3.1/all'
+      const countries = await (await fetch(url)).json()
+      console.log(countries)
+      this.countries = countries
+      this.dataFetched = true;
+      console.log('data has been fetched')
+    },
+  },
+  computed: {
+    topCountries() {
+      return this.countries
+        .sort((a, b) => b.population - a.population)
+        .slice(0, 10)
+    },
+  },
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <h1>Countries</h1>
+  <section v-if="dataFetched">
+    <ul>
+      <CountryCard
+        v-for="country in topCountries" :country="country"
+      ></CountryCard>
+    </ul>
+  </section>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+<style></style>
